@@ -15,11 +15,12 @@ var settings = {
 var app = qlik.openApp("9bd17d8f-ebaa-4651-99c6-3a2d231b0353");
 app.visualization.get("hRZaKk").then(function(vis){
   vis.exportPdf(settings).then(function (result) {
-    console.log('PDF download link: ', result);
+    console.log('https://pu2je9nt8k3awgt.eu.qlikcloud.com/sense/app/9bd17d8f-ebaa-4651-99c6-3a2d231b0353/sheet/1ff88551-9c4d-41e0-b790-37f4c11d3df8/state/analysis ', result);
   });
 });
 
-
+/*
+//define qlik?
  requirejs(["js/qlik"], function(qlik) {
     // open the app
    var app = qlik.openApp("1ff88551-9c4d-41e0-b790-37f4c11d3df8", config);
@@ -32,5 +33,6 @@ app.visualization.get("hRZaKk").then(function(vis){
 app.visualization.get("hRZaKk").then(function(vis){
   vis.setOptions({title:"Now improved"});
 });
+*/
 
  
