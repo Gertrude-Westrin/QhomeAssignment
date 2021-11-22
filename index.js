@@ -1,19 +1,36 @@
-const config = {
-    host: 'pu2je9nt8k3awgt.eu.qlikcloud.com', //for example, 'abc.us.example.com' this is my tenant account
-    prefix: '/',
-    port: 443,
-    isSecure: true,
-    webIntegrationId: 'uAkLBIs5cLtf-23Ui5cs6VjnKMRxEFin'
-  };
+//Start with configuration
+var config = {
+    host: "pu2je9nt8k3awgt.eu.qlikcloud.com",
+    prefix: "/",
+    port: window.location.port,
+    isSecure: true
+ };
 
-  require.config({
-    baseUrl:`https://${config.host}/resources`,
-    webIntegrationId: config.webIntegrationId
+ //export sheet as pdf
+var settings = {
+  documentSize: "a4",
+  aspectRatio: 2,
+  orientation: "landscape"
+};
+var app = qlik.openApp("9bd17d8f-ebaa-4651-99c6-3a2d231b0353");
+app.visualization.get("hRZaKk").then(function(vis){
+  vis.exportPdf(settings).then(function (result) {
+    console.log('PDF download link: ', result);
   });
-
-  require(['js/qlik'], (qlik) => {
-    const app = qlik.openApp('9bd17d8f-ebaa-4651-99c6-3a2d231b0353', config);
-    app.visualization.get('hRZaKk').then(vis => vis.show('QV01'));
-    qlik.on('error', (error) => console.error(error));  
 });
 
+
+ requirejs(["js/qlik"], function(qlik) {
+    // open the app
+   var app = qlik.openApp("1ff88551-9c4d-41e0-b790-37f4c11d3df8", config);
+    // insert Qlik objects into the page.
+    app.getObject(document.getElementById("LB01"), "hRZaKk");
+ });
+
+ //set visualisation options
+ var app = qlik.openApp("9bd17d8f-ebaa-4651-99c6-3a2d231b0353");
+app.visualization.get("hRZaKk").then(function(vis){
+  vis.setOptions({title:"Now improved"});
+});
+
+ 
